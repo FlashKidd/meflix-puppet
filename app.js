@@ -1,8 +1,4 @@
 const puppeteer = require('puppeteer');
-const filesystem = require('fs');
-const path = require('path');
-const axios = require('axios');
-const { Hash, randomUUID } = require('crypto');
 
 (async () => {
 
