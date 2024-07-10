@@ -17,9 +17,17 @@ app.post('/process', async (req, res) => {
     const { $cardNumber } = req.body
     console.log($cardNumber);
 
-    let [$cc, $mes, $ano, $cvv] = $cardNumber.split("|");
+    let [$cc, $mes, $ano, $cvv] = '';
+    let $expiry = '';
+    if ($cardNumber) {
+      [$cc, $mes, $ano, $cvv] = $cardNumber.split("|");
+      $expiry = `${$mes}${$ano}`;
+      // Proceed with further operations using $cc, $mes, $ano, $cvv
+  } else {
+      console.log("$cardNumber is undefined or null.");
+  }
     //$cc = $cc.toString();
-    $expiry = `${$mes}${$ano}`;
+
 
     (async () => {
 
