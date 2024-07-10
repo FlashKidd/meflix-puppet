@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Out of Service</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&family=Poppins:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="maintanance.css">
+</head>
+<body>
+    <div class="container">
+        <h1>We'll be back soon!</h1>
+        <p>We are currently performing scheduled maintenance. We should be back online in:</p>
+        <div id="countdown"></div>
+        <p>Thank you for your patience.</p>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function getTimeRemaining(endtime) {
+            const total = Date.parse(endtime) - Date.parse(new Date());
+            const seconds = Math.floor((total / 1000) % 60);
+            const minutes = Math.floor((total / 1000 / 60) % 60);
+            const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+            return {
+                total,
+                days,
+                hours,
+                minutes,
+                seconds
+            };
+        }
+
+        function initializeClock(id, endtime) {
+            const clock = document.getElementById(id);
+            const timeinterval = setInterval(() => {
+                const t = getTimeRemaining(endtime);
+
+                clock.innerHTML = `0${t.hours}`.slice(-2) + ':' + `0${t.minutes}`.slice(-2) + ':' + `0${t.seconds}`.slice(-2);
+
+                if (t.total <= 0) {
+                    clearInterval(timeinterval);
+                    clock.innerHTML = "00:00:00";
+                }
+            }, 1000);
+        }
+
+        // Set a fixed end time (e.g., 24 hours from now)
+        const endTime = new Date('2024-07-10T09:00:00Z');
+        initializeClock('countdown', endTime);
+    </script>
+</body>
+</html>
